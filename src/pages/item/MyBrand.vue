@@ -16,6 +16,7 @@
       <v-data-table
         :headers="headers"
         :items="brands"
+        :total-items="totalBrands"
         :pagination.sync="pagination"
         :server-items-length="totalBrands"
         :loading="loading"
@@ -60,7 +61,7 @@
       },
       watch:{
         key(){
-          this.loadBrands();
+          this.pagination.page = 1;
         },
         pagination:{
           deep:true,
@@ -81,7 +82,8 @@
               key: this.key,//搜索条件
             }
           }).then(resp =>{
-
+            this.brands = resp.data.items;
+            this.totalBrands = resp.data.page;
           })
           this.loading = false;
         }
