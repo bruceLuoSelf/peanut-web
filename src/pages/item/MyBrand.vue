@@ -18,7 +18,6 @@
         :items="brands"
         :total-items="totalBrands"
         :pagination.sync="pagination"
-        :server-items-length="totalBrands"
         :loading="loading"
         class="elevation-1"
       >
@@ -76,7 +75,7 @@
           this.$http.get("/item/brand/page", {
             params:{
               page:this.pagination.page,//当前页
-              rows:this.pagination.rows,//每页大小
+              rows:this.pagination.rowsPerPage,//每页大小
               sortBy:this.pagination.sortBy,//排序字段
               desc:this.pagination.descending,//是否降序
               key: this.key,//搜索条件
